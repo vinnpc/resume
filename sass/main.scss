@@ -1,0 +1,237 @@
+$bgColor: rgb(239, 239, 239);
+$baseFontColor: rgb(60, 60, 60);
+$descFontColor: rgb(120, 120, 120);
+$highlightFontColor: rgb(33, 187, 166);
+// $hoverFontColor: rgb(16, 139, 122);
+$hoverFontColor: rgb(33, 187, 166);
+$lineColor: rgb(180, 180, 180);
+$titleFontFamily: "museo-sans", "Helvetica", "Microsoft YaHei", Arial, sans-serif;
+$sideWidth: 26%;
+
+@mixin level() {
+  $max: 5;
+  $i: 1;
+  @white $i <= $max {
+    .level-#{$i}-#{$max} {
+      width: 100% * $i / $max;
+      height: 15px;
+      background: $highlightFontColor;
+    }
+    $i: $i + 1;
+  }
+}
+
+/* general */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+body {
+  background: $bgColor;
+  font: 16px/1.5 "Source Sans Pro", "Helvetica", "Microsoft YaHei", Arial, sans-serif;
+  color: $baseFontColor;
+}
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: $highlightFontColor;
+  &:hover {
+    color: darken($highlightFontColor, 20%);
+  }
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+dd {
+  margin: 0;
+}
+  dt {
+    font-weight: 600;
+  }
+  dl {
+    margin: 0 0 5px;
+  }
+.highlight {
+  color: $highlightFontColor;
+}
+.main-title {
+  margin: 25px 0;
+  font-family: $titleFontFamily;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.sub-title {
+  margin: 0 0 10px;
+  font-weight: 400;
+  font-size: 22px;
+}
+.desc {
+  color: $descFontColor;
+  font-size: 15px;
+}
+  .desc p {
+    margin: 0 0 5px;
+  }
+/* layout */
+.paper {
+  width: 940px;
+  margin: 0 auto;
+  padding: 40px 40px;
+  overflow: hidden;
+  background: white;
+}
+/* header */
+.header {
+  overflow: hidden;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 4px solid $lineColor;
+}
+  .name {
+    margin: 0;
+    font-family: $titleFontFamily;
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+  }
+    .name__last {
+      font-weight: 100;
+    }
+  .info {
+    margin:  15px 0 0;
+    text-align: center;
+    font-size: 15px;
+  }
+    .info a {
+      color: $descFontColor;
+      &:hover {
+        color: $highlightFontColor;
+      }
+    }
+    .info__item {
+      display: inline-block;
+      width: 30%;
+      text-align: center;
+      font-family: $titleFontFamily;
+      &:nth-child(1) {
+        text-align: right;
+      }
+      &:nth-child(3) {
+        text-align: left;
+      }
+    }
+    .info__label {
+      padding-right: 10px;
+    }
+/* body */
+/* main */
+.main {
+  margin-right: $sideWidth + 5%;
+  // float: left;
+  // width: 100% - $sideWidth - 5%;
+  overflow: hidden;
+
+  a {
+    text-decoration: underline;
+    color: $descFontColor;
+    &:hover {
+      color: $hoverFontColor;
+    }
+  }
+}
+  .time {
+    position: relative;
+    width: 120px;
+    padding: 10px 20px 0 0;
+    border-right: 2px solid $lineColor;
+    text-align: right;
+    font-weight: 400;
+    vertical-align: top;
+
+    &::after {
+      position: absolute;
+      right: -11px;
+      /* right: -12px; */ /*Firefox*/
+      top: 12px;
+      display: block;
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: $lineColor;
+      border: 4px solid white;
+      border-radius: 50%;
+    }
+  }
+  .content {
+    padding: 5px 0px 20px 20px;
+  }
+/* side */
+.side {
+  width: 26%;
+  float: right;
+}
+  .label {
+    // width: 50px;
+    width: 80px;
+    padding-right: 10px;
+    font-weight: 600;
+    text-align: right;
+    vertical-align: top;
+  }
+  .value, .value a {
+    color: $descFontColor;
+  }
+  .value a:hover {
+    color: $hoverFontColor;
+    text-decoration: underline;
+  }
+.avatar {
+  display: block;
+  width: 150px;
+  margin: 0 auto 20px;
+}
+
+@mixin level() {
+  $max: 10;
+  $i: 1;
+  @while $i <= $max {
+    .level-#{$i}-#{$max} {
+      position: relative;
+      margin-bottom: 12px;
+      &::after {
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        display: block;
+        content: "";
+        height: 2px;
+        width: $i / $max * 100%;
+        background: $highlightFontColor;
+      }
+    }
+    $i: $i + 1;
+  }
+}
+@include level();
+
+
+/* print hack */
+@media print {
+  body {
+    background: white;
+  }
+  .paper {
+    padding: 20px 40px;
+  }
+  .header {
+    margin-bottom: 10px;
+  }
+  .main-title {
+    margin: 20px 0;
+  }
+  .print-hide {
+    display: none;
+  }
+}
